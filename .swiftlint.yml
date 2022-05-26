@@ -1,0 +1,10 @@
+disabled_rules:
+  - type_name
+
+line_length: 120
+
+included:
+  - Sources
+excluded:
+  - Sources/CapsuleUI/CapsuleTableColumnBuilder.swift
+

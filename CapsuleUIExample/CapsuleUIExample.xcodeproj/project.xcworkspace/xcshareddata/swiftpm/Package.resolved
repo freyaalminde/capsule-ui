@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "dynamiccolor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yannickl/DynamicColor.git",
+      "state" : {
+        "revision" : "d9beca13ca85baa50ee29832d0db5129fba69630",
+        "version" : "5.0.1"
+      }
+    },
+    {
+      "identity" : "ide-icons",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/freyaariel/ide-icons",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3fd92e82f32696b71001ebe3b139614d9e4fc39c"
+      }
+    },
+    {
+      "identity" : "preview-screenshots",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/freyaariel/preview-screenshots.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d8c927e96474721853c49386d39e72e1df251d3e"
+      }
+    }
+  ],
+  "version" : 2
+}
