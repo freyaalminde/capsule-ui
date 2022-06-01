@@ -369,6 +369,10 @@ struct Person: Identifiable {
   var usesSwift = true
   var birthday = Date()
   
+  var attributedFamilyName: NSAttributedString {
+    NSAttributedString(string: familyName, attributes: [.foregroundColor: NSColor.systemPink])
+  }
+  
   //    var durr: some View {
   //      Label("durr", systemImage: "dd")
   //    }
@@ -409,7 +413,9 @@ struct CapsuleTable_Previews: PreviewProvider {
       CapsuleTable(data) {
         CapsuleTableColumn("􀊴", value: \.usesSwift).withAlignment(.center).withWidth(20)
         CapsuleTableColumn("Given Name", value: \.givenName)
-        CapsuleTableColumn("Family Name", value: \.familyName)
+          .withAlignment(.right)
+        
+        CapsuleTableColumn("Family Name", value: \.attributedFamilyName)
         // CapsuleTableColumn("Birthday", value: \.birthday)
       }
       .padding(.bottom)
@@ -422,24 +428,26 @@ struct CapsuleTable_Previews: PreviewProvider {
     @State var selection: DBColumn.ID?
 
     var body: some View {
-      CapsuleTable(data, selection: $selection) {
-        CapsuleTableColumn("Name", value: \.name) { data[$0].name = $1 }
-        CapsuleTableColumn("Type", value: \.type) { data[$0].type = $1 }
-        CapsuleTableColumn("􀅎", value: \.isRequired) { data[$0].isRequired = $1 }
-          .withAlignment(.center)
-          .withWidth(20)
-          .withToolTip("Required")
+      VStack(spacing: 0) {
+        CapsuleTable(data, selection: $selection) {
+          CapsuleTableColumn("Name", value: \.name) { data[$0].name = $1 }
+          CapsuleTableColumn("Type", value: \.type) { data[$0].type = $1 }
+          CapsuleTableColumn("􀅎", value: \.isRequired) { data[$0].isRequired = $1 }
+            .withAlignment(.center)
+            .withWidth(20)
+            .withToolTip("Required")
+        }
+        .onDeleteCommand {
+          if selection == nil { NSSound.beep() }
+          data.removeAll { selection == $0.id }
+        }
+        
+        CapsuleFooter(canRemove: selection != nil, onAdd: {
+          data.append(DBColumn())
+        }, onRemove: {
+          data.removeAll { selection == $0.id }
+        })
       }
-      .onDeleteCommand {
-        if selection == nil { NSSound.beep() }
-        data.removeAll { selection == $0.id }
-      }
-      
-      CapsuleFooter(canRemove: selection != nil, onAdd: {
-        data.append(DBColumn())
-      }, onRemove: {
-        data.removeAll { selection == $0.id }
-      })
     }
   }
 
@@ -453,45 +461,46 @@ struct CapsuleTable_Previews: PreviewProvider {
       let _ = Self._printChanges()
       // let _ = print(undoManager)
       
-      CapsuleTable(data, selection: $selection) {
-        CapsuleTableColumn("Name", value: \.givenName) { data[$0].givenName = $1 }
-          .withImage {
-            NSImage(systemSymbolName: "star.fill", accessibilityDescription: nil)?
-              .withSymbolConfiguration(.init(paletteColors: [NSColor($0.favoriteFlavor.color)]))
-          }
+      VStack(spacing: 0) {
+        CapsuleTable(data, selection: $selection) {
+          CapsuleTableColumn("Name", value: \.givenName) { data[$0].givenName = $1 }
+            .withImage {
+              NSImage(systemSymbolName: "star.fill", accessibilityDescription: nil)?
+                .withSymbolConfiguration(.init(paletteColors: [NSColor($0.favoriteFlavor.color)]))
+            }
+          
+          CapsuleTableColumn("Type", value: \.familyName) { data[$0].familyName = $1 }
+          
+          CapsuleTableColumn("Favorite", value: \.favoriteFlavor) { data[$0].favoriteFlavor = $1 }
+          
+          // CapsuleTableColumn("Birthday", value: \Person.birthday)
+        }
+  //      .id(i)
+        .onDeleteCommand {
+          if selection.isEmpty { NSSound.beep() }
+          data.removeAll { selection.contains($0.id) }
+        }
         
-        CapsuleTableColumn("Type", value: \.familyName) { data[$0].familyName = $1 }
+  //      CapsuleTable(data) {
+  //        CapsuleTableColumn("Name", value: \.givenName)
+  //          .withImage { _ in
+  //            NSImage(systemSymbolName: "star.fill", accessibilityDescription: nil)?
+  //              .withSymbolConfiguration(.init(paletteColors: [NSColor.systemOrange]))
+  //          }
+  //
+  //        CapsuleTableColumn("Type", value: \.familyName)
+  //
+  //        CapsuleTableColumn("Favorite", value: \.favoriteFlavor)
+  //
+  //        // CapsuleTableColumn("Birthday", value: \Person.birthday)
+  //      }
         
-        CapsuleTableColumn("Favorite", value: \.favoriteFlavor) { data[$0].favoriteFlavor = $1 }
-        
-        // CapsuleTableColumn("Birthday", value: \Person.birthday)
+        CapsuleFooter(canRemove: !selection.isEmpty, onAdd: {
+          data.append(Person(givenName: "", familyName: "", favoriteFlavor: .chocolate))
+        }, onRemove: {
+          data.removeAll { selection.contains($0.id) }
+        })
       }
-//      .id(i)
-      .onDeleteCommand {
-        if selection.isEmpty { NSSound.beep() }
-        data.removeAll { selection.contains($0.id) }
-      }
-      
-//      CapsuleTable(data) {
-//        CapsuleTableColumn("Name", value: \.givenName)
-//          .withImage { _ in
-//            NSImage(systemSymbolName: "star.fill", accessibilityDescription: nil)?
-//              .withSymbolConfiguration(.init(paletteColors: [NSColor.systemOrange]))
-//          }
-//
-//        CapsuleTableColumn("Type", value: \.familyName)
-//
-//        CapsuleTableColumn("Favorite", value: \.favoriteFlavor)
-//
-//        // CapsuleTableColumn("Birthday", value: \Person.birthday)
-//      }
-      
-      CapsuleFooter(canRemove: !selection.isEmpty, onAdd: {
-        data.append(Person(givenName: "", familyName: "", favoriteFlavor: .chocolate))
-      }, onRemove: {
-        data.removeAll { selection.contains($0.id) }
-      })
-      
 //      Button("wtf") {
 //        data = [
 //          Person(givenName: "AAAAA", familyName: "Chavez", favoriteFlavor: .chocolate),
@@ -533,37 +542,40 @@ struct CapsuleTable_Previews: PreviewProvider {
 //        CapsuleTableColumn<Person2>("", value: \.name)
 //      ] })
       
-      CapsuleTable(data, selection: $selection) {
-        CapsuleTableColumn("Name", value: \.name) { data[$0].name = $1 }
-          .withImage {
-            NSImage(systemSymbolName: "person", accessibilityDescription: nil)?
-              .withSymbolConfiguration(.init(paletteColors: [NSColor($0.favoriteFlavor.color)]))
-          }
-        
-        
-        CapsuleTableColumn("􀫊", value: \.usesSwift) { data[$0].usesSwift = $1 }
-          .withAlignment(.center)
-          .withToolTip("Uses Swift")
-          .withWidth(20)
+      VStack(spacing: 0) {
+        CapsuleTable(data, selection: $selection) {
+          CapsuleTableColumn("Name", value: \.name) { data[$0].name = $1 }
+            .withImage {
+              NSImage(systemSymbolName: "person", accessibilityDescription: nil)?
+                .withSymbolConfiguration(.init(paletteColors: [NSColor($0.favoriteFlavor.color)]))
+            }
+          
+          
+          CapsuleTableColumn("􀫊", value: \.usesSwift) { data[$0].usesSwift = $1 }
+            .withAlignment(.center)
+            .withToolTip("Uses Swift")
+            .withWidth(20)
 
-        CapsuleTableColumn("Favorite Flavor", value: \.favoriteFlavor) { data[$0].favoriteFlavor = $1 }
+          CapsuleTableColumn("Favorite Flavor", value: \.favoriteFlavor) { data[$0].favoriteFlavor = $1 }
+        }
+        
+  //      CapsuleFooter(canRemove: !selection.isEmpty, onAdd: {
+  //        data.append(Person2(name: "", usesSwift: false, favoriteFlavor: .chocolate))
+  //      }, onRemove: {
+  //        data.removeAll { selection.contains($0.id) }
+  //      })
       }
-      
-//      CapsuleFooter(canRemove: !selection.isEmpty, onAdd: {
-//        data.append(Person2(name: "", usesSwift: false, favoriteFlavor: .chocolate))
-//      }, onRemove: {
-//        data.removeAll { selection.contains($0.id) }
-//      })
     }
   }
   
   static var previews: some View {
-    ScreenshotGroup("Documentation.docc/Resources", relativeTo: #filePath) {
-      ReadMeExample()
-        .frame(width: 247, height: 124)
-        // .frame(minWidth: 480, minHeight: 480)
-        .screenshotName("CapsuleTable")
-    }
+//    ScreenshotGroup("Documentation.docc/Resources", relativeTo: #filePath) {
+//      ReadMeExample()
+//        .frame(width: 247, height: 124)
+//        // .frame(minWidth: 480, minHeight: 480)
+//        // .screenshotName("CapsuleTable")
+//    }
+
     Example1()
     Example2()
     Example3()

@@ -115,6 +115,23 @@ public extension CapsuleTableColumn {
     dataCell = cell
   }
 
+  convenience init(_ title: String, value keyPath: KeyPath<RowValue, NSAttributedString>, onSubmit: ((Int, String) -> Void)? = nil) {
+    self.init(identifier: NSUserInterfaceItemIdentifier(title))
+    self.title = title
+    self.keyPath = keyPath
+    if let onSubmit = onSubmit {
+      self.onSubmit = { i in { v in onSubmit(i, v as! String) } }
+    }
+    
+    let cell = CapsuleTableLabelCell()
+    cell.isEditable = onSubmit != nil
+    cell.truncatesLastVisibleLine = true
+    // cell.alignment = .right     // cell.cellsize
+    // cell.interiorBackgroundStyle = .emphasized
+    //cell.cellSize =NSMakeSize(0, 32)
+    dataCell = cell
+  }
+
   convenience init(_ title: String, value keyPath: KeyPath<RowValue, Bool>, onSubmit: ((Int, Bool) -> Void)? = nil) {
     self.init(identifier: NSUserInterfaceItemIdentifier(title))
     self.title = title
