@@ -1,5 +1,5 @@
 import SwiftUI
-import PreviewScreenshots
+import PreviewsCapture
 @testable import CapsuleUI
 import IDEIcons
 
@@ -8,12 +8,12 @@ struct CapsuleUIExampleApp: App {
   var body: some Scene {
     WindowGroup {
       CapsuleList {
-//        Capsule("Example") {
-//          CapsuleTable_Previews.Example1()
-//        }
-//        Capsule("Second Example") {
-//          CapsuleTable_Previews.Example2()
-//        }
+        Capsule("Example") {
+          CapsuleTable_Previews.Example1()
+        }
+        Capsule("Second Example") {
+          CapsuleTable_Previews.Example2()
+        }
         Capsule("A Third Example") {
           CapsuleTable_Previews.Example3()
         }
@@ -88,10 +88,10 @@ struct DataModelExample: View {
 
 struct CapsuleUIExampleApp_Previews: PreviewProvider {
   static var previews: some View {
-    ScreenshotGroup("../CapsuleUI/Documentation.docc/Resources", relativeTo: #filePath) {
+    // ScreenshotGroup("../CapsuleUI/Documentation.docc/Resources", relativeTo: #filePath) {
       DataModelExample()
         .frame(width: 480, height: 256)
-        .screenshotName("CapsuleTable2")
-    }
+        .previewScreenshot("CapsuleTable2")
+    // }
   }
 }

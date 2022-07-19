@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "previews-capture",
+        "repositoryURL": "https://github.com/freyaariel/previews-capture.git",
+        "state": {
+          "branch": "main",
+          "revision": "2920948c5ad2635a77ddc63379b6e9683607ae25",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

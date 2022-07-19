@@ -1,5 +1,5 @@
 import SwiftUI
-import PreviewScreenshots
+import PreviewsCapture
 
 public class CapsuleTableView: NSTableView {
 //  public override func drawCell(_ cell: NSCell) {
@@ -569,12 +569,12 @@ struct CapsuleTable_Previews: PreviewProvider {
   }
   
   static var previews: some View {
-//    ScreenshotGroup("Documentation.docc/Resources", relativeTo: #filePath) {
+//    // ScreenshotGroup("Documentation.docc/Resources", relativeTo: #filePath) {
 //      ReadMeExample()
 //        .frame(width: 247, height: 124)
 //        // .frame(minWidth: 480, minHeight: 480)
-//        // .screenshotName("CapsuleTable")
-//    }
+//        // .previewScreenshot("CapsuleTable")
+//    // }
 
     Example1()
     Example2()

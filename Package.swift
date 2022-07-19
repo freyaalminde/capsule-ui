@@ -1,4 +1,4 @@
-// swift-tools-version: 5.6
+// swift-tools-version: 5.5
 import PackageDescription
 
 let package = Package(
@@ -10,13 +10,13 @@ let package = Package(
     .library(name: "CapsuleUI", targets: ["CapsuleUI"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/freyaariel/preview-screenshots.git", branch: "main"),
+    .package(url: "https://github.com/freyaariel/previews-capture.git", branch: "main"),
   ],
   targets: [
     .target(
       name: "CapsuleUI",
       dependencies: [
-        .product(name: "PreviewScreenshots", package: "preview-screenshots"),
+        .product(name: "PreviewsCapture", package: "previews-capture"),
       ],
       exclude: [
         "CapsuleTableColumnBuilder.swift.gyb",

@@ -1,5 +1,5 @@
 import SwiftUI
-import PreviewScreenshots
+import PreviewsCapture
 
 /// A list of capsule views.
 public struct CapsuleList<Content: View>: View {
@@ -49,10 +49,8 @@ struct CapsuleList_Previews: PreviewProvider {
   }
   
   static var previews: some View {
-    ScreenshotGroup("../../Screenshots", relativeTo: #filePath) {
-      Example()
-        .frame(minWidth: 480, minHeight: 480)
-        .screenshotName("CapsuleList")
-    }
+    Example()
+      .frame(minWidth: 480, minHeight: 480)
+      .previewScreenshot("CapsuleList")
   }
 }
