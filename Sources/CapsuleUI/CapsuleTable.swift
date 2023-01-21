@@ -25,6 +25,7 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
   
   @Environment(\.capsuleGroup) var group
   @Environment(\.tableStyle) var tableStyle
+  @Environment(\.undoManager) var undoManager
 
 //  func dataAt(index: Int) -> Identifiable {
 //
@@ -119,6 +120,7 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
   }
   
   public func updateNSView(_ scrollView: NSScrollView, context: Context) {
+    print(#function)
     let tableView = (scrollView.documentView as! CapsuleTableView)
     // NSLog(#function)
     let oldCount = context.coordinator.data.count
@@ -159,9 +161,10 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
     // tableView.reloadData()
 //    }
     
-    DispatchQueue.main.async {
-      tableView.reloadData()
-    }
+//    DispatchQueue.main.async {
+//      tableView.reloadData()
+//    }
+
 //      context.coordinator.data = data as! [Any?]
 //    }
   
@@ -231,7 +234,7 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
     public func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
       // guard data.count - 1 > row else { return nil }
       guard let tableColumn = tableColumn as? CapsuleTableColumn<Data.Element> else { return nil }
-       let rowIndex = data.index(data.startIndex, offsetBy: row)
+      let rowIndex = data.index(data.startIndex, offsetBy: row)
       guard let rowData = data[safe: rowIndex] else { return nil }
 //      let rowData = data[row]
       
@@ -264,6 +267,8 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
         if let transform = tableColumn.valueTransform { value = transform(value as Any, row) }
         if let image = tableColumn._image?(rowData) { return (image, value) }
         return value
+      } else if let transform = tableColumn.valueTransform {
+        return transform(rowData, row)
       }
 
 //      if let keyPath = tableColumn.keyPath as? KeyPath<Data.Element, CaseIterable> {
@@ -289,7 +294,10 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
     public func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
       guard let tableColumn = tableColumn as? CapsuleTableColumn<Data.Element> else { return }
       guard let onSubmit = tableColumn.onSubmit else { return }
+      print(parent.undoManager)
+      parent.undoManager?.beginUndoGrouping()
       onSubmit(row)(object)
+      parent.undoManager?.endUndoGrouping()
       // tableView.setNeedsDisplay()
       // tableView.reloadData(forRowIndexes: [row], columnIndexes: [tableView.column(withIdentifier: tableColumn.identifier)])
       // tableView.delegate?.tableView(<#T##NSTableView#>, dataCellFor: <#T##NSTableColumn?#>, row: <#T##Int#>)
@@ -348,57 +356,57 @@ extension Collection {
   }
 }
 
-enum Flavor: String, CaseIterable, Identifiable {
-  case chocolate, vanilla, strawberry
-  var id: Self { self }
-  var localizedDescription: String { String(describing: self) }
-  var color: Color {
-    switch self {
-    case .chocolate: return .indigo
-    case .vanilla: return .yellow
-    case .strawberry: return .orange
+struct CapsuleTable_Previews: PreviewProvider {
+  enum Flavor: String, CaseIterable, Identifiable {
+    case chocolate, vanilla, strawberry
+    var id: Self { self }
+    var localizedDescription: String { String(describing: self) }
+    var color: Color {
+      switch self {
+      case .chocolate: return .indigo
+      case .vanilla: return .yellow
+      case .strawberry: return .orange
+      }
     }
   }
-}
 
-struct Person: Identifiable {
-  let id = UUID()
-  var givenName: String
-  var familyName: String
-  var favoriteFlavor: Flavor
-  var usesSwift = true
-  var birthday = Date()
-  
-  var attributedFamilyName: NSAttributedString {
-    NSAttributedString(string: familyName, attributes: [.foregroundColor: NSColor.systemPink])
+  struct Person: Identifiable {
+    let id = UUID()
+    var givenName: String
+    var familyName: String
+    var favoriteFlavor: Flavor
+    var usesSwift = true
+    var birthday = Date()
+
+    var attributedFamilyName: NSAttributedString {
+      NSAttributedString(string: familyName, attributes: [.foregroundColor: NSColor.systemPink])
+    }
+
+    //    var durr: some View {
+    //      Label("durr", systemImage: "dd")
+    //    }
   }
-  
-  //    var durr: some View {
-  //      Label("durr", systemImage: "dd")
-  //    }
-}
 
-class Person2: Identifiable {
-  let id = UUID()
-  var name = ""
-  var usesSwift = true
-  var favoriteFlavor = Flavor.chocolate
-  
-  init(name: String, usesSwift: Bool, favoriteFlavor: Flavor) {
-    self.name = name
-    self.usesSwift = usesSwift
-    self.favoriteFlavor = favoriteFlavor
+  class Person2: Identifiable {
+    let id = UUID()
+    var name = ""
+    var usesSwift = true
+    var favoriteFlavor = Flavor.chocolate
+
+    init(name: String, usesSwift: Bool, favoriteFlavor: Flavor) {
+      self.name = name
+      self.usesSwift = usesSwift
+      self.favoriteFlavor = favoriteFlavor
+    }
   }
-}
 
-class DBColumn: Identifiable {
-  let id = UUID()
-  var name = "property"
-  var type = "undefined"
-  var isRequired = false
-}
+  class DBColumn: Identifiable {
+    let id = UUID()
+    var name = "property"
+    var type = "undefined"
+    var isRequired = false
+  }
 
-struct CapsuleTable_Previews: PreviewProvider {
   static var people = [
     Person(givenName: "Juan", familyName: "Chavez", favoriteFlavor: .chocolate),
     Person(givenName: "Mei", familyName: "Chen", favoriteFlavor: .vanilla),
@@ -459,6 +467,7 @@ struct CapsuleTable_Previews: PreviewProvider {
     
     var body: some View {
       let _ = Self._printChanges()
+      
       // let _ = print(undoManager)
       
       VStack(spacing: 0) {
@@ -469,11 +478,22 @@ struct CapsuleTable_Previews: PreviewProvider {
                 .withSymbolConfiguration(.init(paletteColors: [NSColor($0.favoriteFlavor.color)]))
             }
           
-          CapsuleTableColumn("Type", value: \.familyName) { data[$0].familyName = $1 }
+          CapsuleTableColumn("Surname", value: \.familyName) { data[$0].familyName = $1 }
           
           CapsuleTableColumn("Favorite", value: \.favoriteFlavor) { data[$0].favoriteFlavor = $1 }
-          
-          // CapsuleTableColumn("Birthday", value: \Person.birthday)
+
+          CapsuleTableColumn("􀫊", value: \.usesSwift) { data[$0].usesSwift = $1 }
+            .withAlignment(.center)
+            .withToolTip("Uses Swift")
+            .withWidth(20)
+
+          CapsuleTableColumn("Favorite", value: \.favoriteFlavor) { data[$0].favoriteFlavor = $1 }
+
+          CapsuleTableColumn("Favorite", value: \.favoriteFlavor) { data[$0].favoriteFlavor = $1 }
+
+          // CapsuleTableColumn("Birthday", value: \.birthday) { data[$0].birthday = $1 }
+
+          CapsuleTableColumn("Static Column") { "Oh hi, \($0)!" }
         }
   //      .id(i)
         .onDeleteCommand {

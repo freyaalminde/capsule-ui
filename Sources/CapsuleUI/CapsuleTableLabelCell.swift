@@ -4,7 +4,7 @@ import SwiftUI
 // TODO: clean this the heck up, omg, lol
 
 /// Cell for displaying text alongside optional image.
-public class CapsuleTableLabelCell: NSTextFieldCell {
+open class CapsuleTableLabelCell: NSTextFieldCell {
   var _image: Unmanaged<NSImage>?
   // unowned(unsafe) var _image: NSImage?
 //  var _image: NSImage?
@@ -35,7 +35,7 @@ public class CapsuleTableLabelCell: NSTextFieldCell {
 //    attributedStringValue.draw(with: titleRect(forBounds: frame), options: stringDrawingOptions)
 //  }
   
-  public override var objectValue: Any? {
+  open override var objectValue: Any? {
     get { super.objectValue }
     set {
       if let (image, object) = newValue as? (NSImage, Any?) {
@@ -79,7 +79,7 @@ public class CapsuleTableLabelCell: NSTextFieldCell {
   open override func imageRect(forBounds bounds: NSRect) -> NSRect {
     guard let size = imageValue?.size else { return .zero }
     let y = floor(bounds.origin.y + (bounds.size.height - size.height) / 2)
-    let point = CGPoint(x: bounds.origin.x, y: y)
+    let point = NSPoint(x: bounds.origin.x, y: y)
     return NSRect(origin: point, size: size)
   }
   
@@ -95,7 +95,7 @@ public class CapsuleTableLabelCell: NSTextFieldCell {
     return titleFrame
   }
   
-  public override func cellSize(forBounds rect: NSRect) -> NSSize {
+  open override func cellSize(forBounds rect: NSRect) -> NSSize {
     var size = super.cellSize(forBounds: rect)
     size.width += imageRect(forBounds: rect).width + imageSpacing.width
     return size
@@ -117,7 +117,7 @@ public class CapsuleTableLabelCell: NSTextFieldCell {
     attributedStringValue.draw(with: titleRect(forBounds: frame), options: stringDrawingOptions)
   }
   
-//  public override func drawingRect(forBounds rect: NSRect) -> NSRect {
+//  open override func drawingRect(forBounds rect: NSRect) -> NSRect {
 //    super.drawingRect(forBounds: rect).insetBy(dx: -20, dy: 0)
 //  }
   
@@ -160,7 +160,7 @@ public class CapsuleTableLabelCell: NSTextFieldCell {
 //    imageValue?.draw(in: imageRect(forBounds: cellFrame))
 //  }
   
-  public override func expansionFrame(withFrame cellFrame: NSRect, in view: NSView) -> NSRect {
+  open override func expansionFrame(withFrame cellFrame: NSRect, in view: NSView) -> NSRect {
     titleRect(forBounds: cellFrame)
   }
   

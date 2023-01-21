@@ -39,6 +39,7 @@ public struct CapsuleFooter: View {
     //.padding(.top, -5)
     .buttonStyle(.borderless)
     .labelStyle(.iconOnly)
+    .imageScale(.large)
   }
 }
 
