@@ -59,13 +59,19 @@ extension NSTableColumn {
   }
 }
 
+// TODO: remove `width` prefix?
 public extension CapsuleTableColumn {
   func withAlignment(_ value: NSTextAlignment) -> Self {
     headerCell.alignment = value
     (dataCell as? NSCell)?.alignment = value
     return self
   }
-  
+
+  func withHeaderAlignment(_ value: NSTextAlignment) -> Self {
+    headerCell.alignment = value
+    return self
+  }
+
   func withFont(_ value: NSFont) -> Self {
     (dataCell as? NSCell)?.font = value
     return self
@@ -83,6 +89,10 @@ public extension CapsuleTableColumn {
   func withToolTip(_ value: String?) -> Self {
     headerToolTip = value
     return self
+  }
+
+  func width(_ value: CGFloat) -> Self {
+    withWidth(min: value, max: value)
   }
   
   func withWidth(_ value: CGFloat) -> Self {
@@ -126,9 +136,9 @@ public extension CapsuleTableColumn {
 //    }
 //  }
 
-  convenience init(_ title: String, value keyPath: KeyPath<RowValue, String>, completions: [(NSImage, String)], onSubmit: ((Int, String) -> Void)? = nil) {
-    self.init(identifier: NSUserInterfaceItemIdentifier(title))
-    self.title = title
+  convenience init(_ title: LocalizedStringKey, value keyPath: KeyPath<RowValue, String>, completions: [(NSImage, String)], onSubmit: ((Int, String) -> Void)? = nil) {
+    self.init(identifier: NSUserInterfaceItemIdentifier(title.string))
+    self.title = title.string
     self.keyPath = keyPath
     let cell = CapsuleTableComboBoxCell()
     // cell.controlSize = .small
@@ -149,7 +159,7 @@ public extension CapsuleTableColumn {
     dataCell = cell
 
     var newValue: String?
-    var overridenRow: Int?
+//    var overridenRow: Int?
 //    valueTransform = { v, i in
 ////      if let (_, v) = v as? (NSImage, String) {
 ////        return v

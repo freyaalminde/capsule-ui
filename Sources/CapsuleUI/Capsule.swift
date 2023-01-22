@@ -31,9 +31,9 @@ public struct Capsule<Content: View>: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background()
         .onTapGesture {
-          withAnimation {
+          // withAnimation {
             isExpanded.wrappedValue.toggle()
-          }
+          // }
         }
     }
     .padding(.horizontal, 16)

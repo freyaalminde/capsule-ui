@@ -2,13 +2,20 @@ import SwiftUI
 
 /// Capsule footer view.
 public struct CapsuleFooter: View {
-  static var buttonSize: CGFloat { 24 }
+  private static var buttonSize: CGFloat { 24 }
+
+  private var canAdd = false
+  private var canRemove = false
+  private var onAdd: () -> Void
+  private var onRemove: () -> Void
   
-  var canRemove = false
-  var onAdd: () -> Void
-  var onRemove: () -> Void
-  
-  public init(canRemove: Bool = false, onAdd: (() -> Void)? = nil, onRemove: (() -> Void)? = nil) {
+  public init(
+    canAdd: Bool = true,
+    canRemove: Bool = false,
+    onAdd: (() -> Void)? = nil,
+    onRemove: (() -> Void)? = nil
+  ) {
+    self.canAdd = canAdd
     self.canRemove = canRemove
     self.onAdd = onAdd ?? {}
     self.onRemove = onRemove ?? {}
@@ -21,6 +28,7 @@ public struct CapsuleFooter: View {
           Label("Add item", systemImage: "plus")
             .frame(width: Self.buttonSize, height: Self.buttonSize)
         }
+        .disabled(!canAdd)
       }
       
       if let onRemove = onRemove {

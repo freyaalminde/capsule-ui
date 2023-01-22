@@ -3,8 +3,8 @@ import SwiftUI
 public extension CapsuleTableColumn {
   // TODO: should be `String?`, i guess — ditto for every other column
   convenience init(_ title: LocalizedStringKey, value keyPath: KeyPath<RowValue, String>, onSubmit: ((Int, String) -> Void)? = nil) {
-    self.init(identifier: NSUserInterfaceItemIdentifier("\(title)"))
-    self.title = "\(title)"
+    self.init(identifier: NSUserInterfaceItemIdentifier(title.string))
+    self.title = title.string
     self.keyPath = keyPath
 
     if let onSubmit = onSubmit {
@@ -18,8 +18,8 @@ public extension CapsuleTableColumn {
   }
 
   convenience init(_ title: LocalizedStringKey, value keyPath: KeyPath<RowValue, NSAttributedString>, onSubmit: ((Int, String) -> Void)? = nil) {
-    self.init(identifier: NSUserInterfaceItemIdentifier("\(title)"))
-    self.title = "\(title)"
+    self.init(identifier: NSUserInterfaceItemIdentifier(title.string))
+    self.title = title.string
     self.keyPath = keyPath
     
     if let onSubmit = onSubmit {
@@ -33,8 +33,8 @@ public extension CapsuleTableColumn {
   }
 
   convenience init(_ title: LocalizedStringKey, value: @escaping (RowValue) -> Any?) {
-    self.init(identifier: NSUserInterfaceItemIdentifier("\(title)"))
-    self.title = "\(title)"
+    self.init(identifier: NSUserInterfaceItemIdentifier(title.string))
+    self.title = title.string
 
     valueTransform = { v, _ in value(v as! RowValue) }
 

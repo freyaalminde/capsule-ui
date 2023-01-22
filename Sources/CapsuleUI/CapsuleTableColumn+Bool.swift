@@ -2,8 +2,8 @@ import SwiftUI
 
 public extension CapsuleTableColumn {
   convenience init(_ title: LocalizedStringKey, value keyPath: KeyPath<RowValue, Bool>, onSubmit: ((Int, Bool) -> Void)? = nil) {
-    self.init(identifier: NSUserInterfaceItemIdentifier("\(title)"))
-    self.title = "\(title)"
+    self.init(identifier: NSUserInterfaceItemIdentifier(title.string))
+    self.title = title.string
     self.keyPath = keyPath
 
     var newValue: Int?

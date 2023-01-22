@@ -36,7 +36,8 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
 //    self.columns = columns
 //  }
 
-  @_disfavoredOverload public init(_ data: Data, @CapsuleTableColumnBuilder<Data.Element> columns: () -> [CapsuleTableColumn<Data.Element>]) {
+  @_disfavoredOverload
+  public init(_ data: Data, @CapsuleTableColumnBuilder<Data.Element> columns: () -> [CapsuleTableColumn<Data.Element>]) {
     self.data = data
     self.columns = columns()
   }
@@ -120,7 +121,7 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
   }
   
   public func updateNSView(_ scrollView: NSScrollView, context: Context) {
-    print(#function)
+    // print(#function)
     let tableView = (scrollView.documentView as! CapsuleTableView)
     // NSLog(#function)
     let oldCount = context.coordinator.data.count
@@ -485,7 +486,7 @@ struct CapsuleTable_Previews: PreviewProvider {
           CapsuleTableColumn("􀫊", value: \.usesSwift) { data[$0].usesSwift = $1 }
             .withAlignment(.center)
             .withToolTip("Uses Swift")
-            .withWidth(20)
+            .width(20)
 
           CapsuleTableColumn("Favorite", value: \.favoriteFlavor) { data[$0].favoriteFlavor = $1 }
 
