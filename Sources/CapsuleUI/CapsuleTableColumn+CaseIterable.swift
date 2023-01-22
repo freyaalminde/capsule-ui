@@ -1,9 +1,10 @@
 import SwiftUI
 
+// TODO: add some kind of `displatName` or `localizedName` to this
 public extension CapsuleTableColumn {
-  convenience init<V: CaseIterable & Equatable>(_ title: String, value keyPath: KeyPath<RowValue, V>, onSubmit: ((Int, V) -> Void)? = nil) {
-    self.init(identifier: NSUserInterfaceItemIdentifier(title))
-    self.title = title
+  convenience init<V: CaseIterable & Equatable>(_ title: LocalizedStringKey, value keyPath: KeyPath<RowValue, V>, onSubmit: ((Int, V) -> Void)? = nil) {
+    self.init(identifier: NSUserInterfaceItemIdentifier("\(title)"))
+    self.title = "\(title)"
     self.keyPath = keyPath
 
     let cell = CapsuleTablePopUpButtonCell()
