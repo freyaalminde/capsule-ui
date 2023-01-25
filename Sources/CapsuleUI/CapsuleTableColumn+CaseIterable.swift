@@ -93,3 +93,47 @@ public extension CapsuleTableColumn {
     }
   }
 }
+
+open class CapsuleTablePopUpButtonCell: NSPopUpButtonCell {
+//  override func titleRect(forBounds cellFrame: NSRect) -> NSRect {
+//    super.titleRect(forBounds: cellFrame.insetBy(dx: -5, dy: 0))
+//  }
+
+  open override func drawingRect(forBounds rect: NSRect) -> NSRect {
+    super.drawingRect(forBounds: rect.insetBy(dx: -2.5, dy: 6))
+  }
+
+//  open override func focusRingMaskBounds(forFrame cellFrame: NSRect, in controlView: NSView) -> NSRect {
+//    super.focusRingMaskBounds(forFrame: cellFrame.insetBy(dx: -2, dy: 4).offsetBy(dx: 0, dy: 0.5), in: controlView)
+//  }
+
+//  open override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
+//    super.draw(withFrame: cellFrame.insetBy(dx: 5, dy: 5), in: controlView)
+//  }
+
+//  override func cellSize(forBounds rect: NSRect) -> NSSize {
+//    var s = super.cellSize(forBounds: rect)
+//    s.width += 5 * 2
+//    return s
+//  }
+
+//  override func drawSeparatorItem(withFrame cellFrame: NSRect, in controlView: NSView) {
+//    super.drawSeparatorItem(withFrame: cellFrame, in: controlView)
+//  }
+//
+//  override func drawBorderAndBackground(withFrame cellFrame: NSRect, in controlView: NSView) {
+//    super.drawBorderAndBackground(withFrame: cellFrame.insetBy(dx: -5, dy: 0), in: controlView)
+//  }
+
+//  override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
+//    super.draw(withFrame: cellFrame.insetBy(dx: -5, dy: 0), in: controlView)
+//  }
+
+//  override func drawBorderAndBackground(withFrame cellFrame: NSRect, in controlView: NSView) {
+//    super.drawBorderAndBackground(withFrame: cellFrame.insetBy(dx: -5, dy: 0), in: controlView)
+//  }
+
+//  override func drawInterior(withFrame cellFrame: NSRect, in controlView: NSView) {
+//    super.drawInterior(withFrame: cellFrame.insetBy(dx: -5, dy: 0), in: controlView)
+//  }
+}

@@ -25,6 +25,7 @@ fileprivate var _ActionKey: UInt8 = 0
 //fileprivate var ComboDataSourceKey: UInt8 = 0
 
 /// A column that displays a cell for each row in a capsule table.
+// TODO: don’t use associated objects for this (why were we in the first place? old API, maybe?)
 public final class CapsuleTableColumn<RowValue>: NSTableColumn {
   var _image: ((RowValue) -> NSImage?)? {
     get { objc_getAssociatedObject(self, &_ImageKey) as? (RowValue) -> NSImage? }
@@ -59,7 +60,7 @@ extension NSTableColumn {
   }
 }
 
-// TODO: remove `width` prefix?
+// TODO: remove `with` prefix?
 public extension CapsuleTableColumn {
   func withAlignment(_ value: NSTextAlignment) -> Self {
     headerCell.alignment = value
@@ -158,7 +159,7 @@ public extension CapsuleTableColumn {
 //    }
     dataCell = cell
 
-    var newValue: String?
+//    var newValue: String?
 //    var overridenRow: Int?
 //    valueTransform = { v, i in
 ////      if let (_, v) = v as? (NSImage, String) {
@@ -189,10 +190,10 @@ public extension CapsuleTableColumn {
     if let onSubmit = onSubmit {
       self.onSubmit = { i in { v in
         if let v = v as? String {
-          newValue = v
+//          newValue = v
           onSubmit(i, v)
         } else if let (_, v) = v as? (NSImage, String) {
-          newValue = v
+//          newValue = v
           onSubmit(i, v)
         }
       } }
@@ -302,50 +303,6 @@ class CapsuleTableComboBoxCell: NSComboBoxCell, NSTableViewDelegate, NSTableView
 //
 //    // if event.locationInWindow
 //    // .editableTextArea
-//  }
-}
-
-open class CapsuleTablePopUpButtonCell: NSPopUpButtonCell {
-//  override func titleRect(forBounds cellFrame: NSRect) -> NSRect {
-//    super.titleRect(forBounds: cellFrame.insetBy(dx: -5, dy: 0))
-//  }
-
-  open override func drawingRect(forBounds rect: NSRect) -> NSRect {
-    super.drawingRect(forBounds: rect.insetBy(dx: -2.5, dy: 6))
-  }
-
-//  open override func focusRingMaskBounds(forFrame cellFrame: NSRect, in controlView: NSView) -> NSRect {
-//    super.focusRingMaskBounds(forFrame: cellFrame.insetBy(dx: -2, dy: 4).offsetBy(dx: 0, dy: 0.5), in: controlView)
-//  }
-
-//  open override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
-//    super.draw(withFrame: cellFrame.insetBy(dx: 5, dy: 5), in: controlView)
-//  }
-
-//  override func cellSize(forBounds rect: NSRect) -> NSSize {
-//    var s = super.cellSize(forBounds: rect)
-//    s.width += 5 * 2
-//    return s
-//  }
-  
-//  override func drawSeparatorItem(withFrame cellFrame: NSRect, in controlView: NSView) {
-//    super.drawSeparatorItem(withFrame: cellFrame, in: controlView)
-//  }
-//
-//  override func drawBorderAndBackground(withFrame cellFrame: NSRect, in controlView: NSView) {
-//    super.drawBorderAndBackground(withFrame: cellFrame.insetBy(dx: -5, dy: 0), in: controlView)
-//  }
-  
-//  override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
-//    super.draw(withFrame: cellFrame.insetBy(dx: -5, dy: 0), in: controlView)
-//  }
-  
-//  override func drawBorderAndBackground(withFrame cellFrame: NSRect, in controlView: NSView) {
-//    super.drawBorderAndBackground(withFrame: cellFrame.insetBy(dx: -5, dy: 0), in: controlView)
-//  }
-  
-//  override func drawInterior(withFrame cellFrame: NSRect, in controlView: NSView) {
-//    super.drawInterior(withFrame: cellFrame.insetBy(dx: -5, dy: 0), in: controlView)
 //  }
 }
 

@@ -5,9 +5,7 @@ import PreviewsCapture
 public struct CapsuleList<Content: View>: View {
   var content: Content
   @State var group = CapsuleGroup()
-  
-  // @Environment(\.colorScheme) private var colorScheme
-  
+
   public init(@ViewBuilder content: () -> Content) {
     self.content = content()
   }
@@ -21,11 +19,8 @@ public struct CapsuleList<Content: View>: View {
       .padding(.vertical, 18)
     }
     .frame(alignment: .top)
-    // .padding(.vertical, -18)
-    // .background(colorScheme == .light ? .white : .background)
     .background(.background)
     .environment(\.capsuleGroup, group)
-    // ._safeAreaInsets(EdgeInsets(top: 29 + 29 - 1, leading: 0, bottom: 0, trailing: 0))
   }
 }
 

@@ -158,14 +158,15 @@ open class CapsuleTableLabelCell: NSTextFieldCell {
 //    super.drawInterior(withFrame: textFrame, in: controlView)
 //    imageValue?.draw(in: imageRect(forBounds: cellFrame))
 //  }
+
   
-  open override func expansionFrame(withFrame cellFrame: NSRect, in view: NSView) -> NSRect {
-    titleRect(forBounds: cellFrame)
-  }
-  
-  open override func draw(withExpansionFrame cellFrame: NSRect, in view: NSView) {
-    var stringDrawingOptions: NSString.DrawingOptions = [.usesLineFragmentOrigin]
-    if truncatesLastVisibleLine { stringDrawingOptions.insert(.truncatesLastVisibleLine) }
-    attributedStringValue.draw(with: expansionFrame(withFrame: cellFrame, in: view), options: stringDrawingOptions)
-  }
+//  open override func expansionFrame(withFrame cellFrame: NSRect, in view: NSView) -> NSRect {
+//    titleRect(forBounds: cellFrame)
+//  }
+//
+//  open override func draw(withExpansionFrame cellFrame: NSRect, in view: NSView) {
+//    var stringDrawingOptions: NSString.DrawingOptions = [.usesLineFragmentOrigin]
+//    if truncatesLastVisibleLine { stringDrawingOptions.insert(.truncatesLastVisibleLine) }
+//    attributedStringValue.draw(with: expansionFrame(withFrame: cellFrame, in: view), options: stringDrawingOptions)
+//  }
 }

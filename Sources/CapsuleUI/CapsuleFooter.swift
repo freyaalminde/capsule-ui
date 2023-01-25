@@ -23,7 +23,7 @@ public struct CapsuleFooter: View {
   
   public var body: some View {
     HStack(spacing: 0) {
-      if let onAdd = onAdd {
+      if let onAdd {
         Button(action: onAdd) {
           Label("Add item", systemImage: "plus")
             .frame(width: Self.buttonSize, height: Self.buttonSize)
@@ -31,7 +31,7 @@ public struct CapsuleFooter: View {
         .disabled(!canAdd)
       }
       
-      if let onRemove = onRemove {
+      if let onRemove {
         Button(action: onRemove) {
           Label("Remove items", systemImage: "minus")
             .frame(width: Self.buttonSize, height: Self.buttonSize)
@@ -41,10 +41,7 @@ public struct CapsuleFooter: View {
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(.top, 0.5)
-    .padding(.bottom, 1.5)
-    .padding(.bottom, 10)
-    //.padding(.vertical, 5)
-    //.padding(.top, -5)
+    .padding(.bottom, 11.5)
     .buttonStyle(.borderless)
     .labelStyle(.iconOnly)
     .imageScale(.large)

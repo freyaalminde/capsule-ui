@@ -19,10 +19,8 @@ public struct Capsule<Content: View>: View {
     DisclosureGroup(isExpanded: isExpanded) {
       VStack(spacing: 0) {
         content
-//          .fixedSize()
       }
       .padding(.leading, 9)
-      //.frame(maxWidth: .infinity, minHeight: 32) // FIXME
     } label: {
       Text(title)
         .font(.callout.bold())
