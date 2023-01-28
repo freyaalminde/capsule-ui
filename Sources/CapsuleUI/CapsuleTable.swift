@@ -87,6 +87,9 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
     // tableView.intercellSpacing = NSMakeSize(8.5, 0)
 
     let headerMenu = NSMenu()
+    headerMenu.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .small))
+    headerMenu.autoenablesItems = false
+    headerMenu.showsStateColumn = true
     headerMenu.items = columns.map {
       let item = NSMenuItem()
       item.title = $0.headerToolTip ?? $0.title
@@ -96,9 +99,11 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
       item.representedObject = $0
       return item
     }
-    headerMenu.autoenablesItems = false
-    headerMenu.showsStateColumn = true
-    headerMenu.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .small))
+    headerMenu.addItem(.separator())
+    headerMenu.addItem(withTitle: "Show All Columns", action: #selector(Coordinator.selectAllColumns), keyEquivalent: "")
+      .target = context.coordinator
+    headerMenu.addItem(withTitle: "Auto Size All Columns", action: #selector(Coordinator.autoSizeAllColumns), keyEquivalent: "")
+      .target = context.coordinator
     tableView.headerView?.menu = headerMenu
     
     // tableView.headerView?.isHidden = false
@@ -338,6 +343,14 @@ public struct CapsuleTable<Data: RandomAccessCollection, ID>: NSViewRepresentabl
       }
       
       return true
+    }
+
+    @objc func selectAllColumns() {
+      parent.hiddenColumnIdentifiers = []
+    }
+
+    @objc func autoSizeAllColumns() {
+      print("dddddd")
     }
   }
 }

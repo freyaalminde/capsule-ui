@@ -4,7 +4,21 @@ import SwiftUI
 
 /// Cell for displaying text alongside optional image.
 open class CapsuleTableLabelCell: NSTextFieldCell {
-  var _image: Unmanaged<NSImage>?
+  var _image: NSImage?
+
+  // https://stackoverflow.com/a/53936909/1569350
+  open override func copy(with zone: NSZone? = nil) -> Any {
+    // let copy = super.copy(with: zone) as! Self
+    let copy = Self()
+    copy.image = image
+    copy.objectValue = objectValue
+    copy.isEditable = isEditable
+    copy.isSelectable = isSelectable
+    copy.isHighlighted = isHighlighted
+    return copy
+  }
+
+
   // unowned(unsafe) var _image: NSImage?
 //  var _image: NSImage?
   
@@ -38,7 +52,7 @@ open class CapsuleTableLabelCell: NSTextFieldCell {
     get { super.objectValue }
     set {
       if let (image, object) = newValue as? (NSImage, Any?) {
-         _image = Unmanaged.passUnretained(image)
+         _image = image
 //        _image = image
         super.objectValue = object
       } else {
@@ -54,7 +68,7 @@ open class CapsuleTableLabelCell: NSTextFieldCell {
 //    return image
 ////    return nil
     ///
-    _image?.takeUnretainedValue()
+    _image
 //    _image
 //    _image
   }
