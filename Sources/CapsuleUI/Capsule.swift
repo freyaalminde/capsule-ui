@@ -29,9 +29,7 @@ public struct Capsule<Content: View>: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background()
         .onTapGesture {
-          // withAnimation {
-            isExpanded.wrappedValue.toggle()
-          // }
+          isExpanded.wrappedValue.toggle()
         }
     }
     .padding(.horizontal, 16)
@@ -39,6 +37,9 @@ public struct Capsule<Content: View>: View {
     // .padding(.vertical, 8)
     .overlay(alignment: .bottom) {
       Divider()
+    }
+    .transaction { transaction in
+      transaction.animation = nil
     }
   }
 }

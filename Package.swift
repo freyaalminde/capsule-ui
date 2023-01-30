@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
   name: "capsule-ui",
+  defaultLocalization: "en",
   platforms: [
     .macOS(.v12),
   ],
