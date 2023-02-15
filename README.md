@@ -1,22 +1,22 @@
-# Capsule UI
+# Capsule UI (🚧 Work in Progress 🚧)
 
 Capsule UI for AppKit and SwiftUI.
 
-![](https://github.com/freyaariel/capsule-ui/blob/main/Screenshots/CapsuleList.png?raw=true)
+![](/Screenshots/CapsuleList.png?raw=true)
 
 
 ## Installation
 
 ```swift
-.package(url: "https://github.com/freyaariel/capsule-ui.git", branch: "main")
+.package(url: "https://github.com/freyaalminde/capsule-ui.git", branch: "main"),
 ```
 
 ```swift
-import CapsuleUI
+.product(name: "CapsuleUI", package: "capsule-ui"),
 ```
 
 
-## Usage
+## Overview
 
 ```swift
 CapsuleList {
@@ -36,7 +36,7 @@ CapsuleList {
 
 ### Table Usage
 
-![](https://github.com/freyaariel/capsule-ui/blob/main/Sources/CapsuleUI/Documentation.docc/Resources/CapsuleTable.png?raw=true)
+![](/Sources/CapsuleUI/Documentation.docc/Resources/CapsuleTable.png?raw=true)
 
 ```swift
 CapsuleTable(data, selection: $selection) {
