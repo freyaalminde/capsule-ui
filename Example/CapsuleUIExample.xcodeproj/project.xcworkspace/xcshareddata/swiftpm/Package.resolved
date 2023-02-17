@@ -2,29 +2,20 @@
   "object": {
     "pins": [
       {
-        "package": "DynamicColor",
-        "repositoryURL": "https://github.com/yannickl/DynamicColor.git",
-        "state": {
-          "branch": null,
-          "revision": "d9beca13ca85baa50ee29832d0db5129fba69630",
-          "version": "5.0.1"
-        }
-      },
-      {
         "package": "ide-icons",
         "repositoryURL": "https://github.com/freyaariel/ide-icons",
         "state": {
           "branch": "main",
-          "revision": "997917f770fe52d21053fe0ac1ca69e38342d35c",
+          "revision": "2afff5926a7ed9de540c075b15cf7913e7ba7c71",
           "version": null
         }
       },
       {
         "package": "previews-capture",
-        "repositoryURL": "https://github.com/freyaariel/previews-capture.git",
+        "repositoryURL": "https://github.com/freyaalminde/previews-capture.git",
         "state": {
-          "branch": "main",
-          "revision": "337a6a7f7bee3500e07e151575f2be0bd68d1ee3",
+          "branch": "refactor",
+          "revision": "8a9b4ab5c30fa87a04b0aff0af829286e5bc3807",
           "version": null
         }
       }

@@ -11,7 +11,7 @@ let package = Package(
     .library(name: "CapsuleUI", targets: ["CapsuleUI"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/freyaariel/previews-capture.git", branch: "main"),
+    .package(url: "https://github.com/freyaalminde/previews-capture.git", branch: "refactor"),
   ],
   targets: [
     .target(

@@ -46,6 +46,6 @@ struct CapsuleList_Previews: PreviewProvider {
   static var previews: some View {
     Example()
       .frame(minWidth: 480, minHeight: 480)
-      .previewScreenshot("CapsuleList")
+      .previewDisplayName("CapsuleList")
   }
 }

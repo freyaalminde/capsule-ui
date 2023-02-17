@@ -91,7 +91,7 @@ struct CapsuleUIExampleApp_Previews: PreviewProvider {
     // ScreenshotGroup("../CapsuleUI/Documentation.docc/Resources", relativeTo: #filePath) {
       DataModelExample()
         .frame(width: 480, height: 256)
-        .previewScreenshot("CapsuleTable2")
+        .previewDisplayName("CapsuleTable2")
     // }
   }
 }

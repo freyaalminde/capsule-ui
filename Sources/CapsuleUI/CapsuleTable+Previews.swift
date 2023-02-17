@@ -242,7 +242,7 @@ struct CapsuleTable_Previews: PreviewProvider {
 //      ReadMeExample()
 //        .frame(width: 247, height: 124)
 //        // .frame(minWidth: 480, minHeight: 480)
-//        // .previewScreenshot("CapsuleTable")
+//        // .previewDisplayName("CapsuleTable")
 //    // }
 
     Example1()
