@@ -1,5 +1,5 @@
 import SwiftUI
-import PreviewsCapture
+//import PreviewsCapture
 @testable import CapsuleUI
 import IDEIcons
 

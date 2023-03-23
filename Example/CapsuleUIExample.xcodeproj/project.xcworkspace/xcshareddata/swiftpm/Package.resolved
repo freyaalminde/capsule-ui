@@ -6,16 +6,7 @@
         "repositoryURL": "https://github.com/freyaariel/ide-icons",
         "state": {
           "branch": "main",
-          "revision": "2afff5926a7ed9de540c075b15cf7913e7ba7c71",
-          "version": null
-        }
-      },
-      {
-        "package": "previews-capture",
-        "repositoryURL": "https://github.com/freyaalminde/previews-capture.git",
-        "state": {
-          "branch": "refactor",
-          "revision": "8a9b4ab5c30fa87a04b0aff0af829286e5bc3807",
+          "revision": "cd1ccc000d3a35c76a751e0ad424967fe606b939",
           "version": null
         }
       }

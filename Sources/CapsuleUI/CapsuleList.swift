@@ -1,5 +1,5 @@
 import SwiftUI
-import PreviewsCapture
+//import PreviewsCapture
 
 /// A list of capsule views.
 public struct CapsuleList<Content: View>: View {

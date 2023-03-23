@@ -1,5 +1,5 @@
 import SwiftUI
-import PreviewsCapture
+//import PreviewsCapture
 
 struct CapsuleTable_Previews: PreviewProvider {
   enum Flavor: String, CaseIterable, Identifiable {

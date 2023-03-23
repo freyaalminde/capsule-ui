@@ -10,15 +10,9 @@ let package = Package(
   products: [
     .library(name: "CapsuleUI", targets: ["CapsuleUI"]),
   ],
-  dependencies: [
-    .package(url: "https://github.com/freyaalminde/previews-capture.git", branch: "refactor"),
-  ],
   targets: [
     .target(
       name: "CapsuleUI",
-      dependencies: [
-        .product(name: "PreviewsCapture", package: "previews-capture"),
-      ],
       exclude: [
         "CapsuleTableColumnBuilder.swift.gyb",
       ]
