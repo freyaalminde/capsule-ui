@@ -6,8 +6,8 @@ public struct CapsuleFooter: View {
 
   private var canAdd = false
   private var canRemove = false
-  private var onAdd: () -> Void
-  private var onRemove: () -> Void
+  private var onAdd: (() -> Void)?
+  private var onRemove: (() -> Void)?
   
   public init(
     canAdd: Bool = true,
@@ -17,8 +17,8 @@ public struct CapsuleFooter: View {
   ) {
     self.canAdd = canAdd
     self.canRemove = canRemove
-    self.onAdd = onAdd ?? {}
-    self.onRemove = onRemove ?? {}
+    self.onAdd = onAdd
+    self.onRemove = onRemove
   }
   
   public var body: some View {
@@ -50,7 +50,7 @@ public struct CapsuleFooter: View {
 
 struct CapsuleFooter_Previews: PreviewProvider {
   static var previews: some View {
-    CapsuleFooter()
+    CapsuleFooter(onAdd: {}, onRemove: {})
       .frame(minWidth: 400)
   }
 }

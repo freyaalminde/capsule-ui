@@ -19,7 +19,7 @@ struct CapsuleUIExampleApp: App {
         }
         Capsule("Data Model") {
           DataModelExample()
-          CapsuleFooter()
+          CapsuleFooter(onAdd: {}, onRemove: {})
         }
       }
     }
