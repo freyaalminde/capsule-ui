@@ -4,17 +4,15 @@ Capsule UI for AppKit and SwiftUI.
 
 ![](/Screenshots/CapsuleList.png?raw=true)
 
-
 ## Installation
 
 ```swift
-.package(url: "https://github.com/freyaalminde/capsule-ui.git", branch: "main"),
+.package(url: "https://github.com/freysie/capsule-ui.git", branch: "main"),
 ```
 
 ```swift
 .product(name: "CapsuleUI", package: "capsule-ui"),
 ```
-
 
 ## Overview
 
@@ -33,7 +31,6 @@ CapsuleList {
 }
 ```
 
-
 ### Table Usage
 
 ![](/Sources/CapsuleUI/Documentation.docc/Resources/CapsuleTable.png?raw=true)
@@ -45,7 +42,6 @@ CapsuleTable(data, selection: $selection) {
 }
 
 ```
-
 
 #### Images
 
@@ -59,4 +55,3 @@ CapsuleTable(data, selection: $selection) {
   CapsuleTableColumn("Email Address", value: \.emailAddress)
 }
 ```
-
