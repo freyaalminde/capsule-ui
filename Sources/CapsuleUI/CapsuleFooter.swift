@@ -48,9 +48,13 @@ public struct CapsuleFooter: View {
   }
 }
 
+#if DEBUG
+
 struct CapsuleFooter_Previews: PreviewProvider {
   static var previews: some View {
     CapsuleFooter(onAdd: {}, onRemove: {})
       .frame(minWidth: 400)
   }
 }
+
+#endif

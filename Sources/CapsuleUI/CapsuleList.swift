@@ -24,6 +24,8 @@ public struct CapsuleList<Content: View>: View {
   }
 }
 
+#if DEBUG
+
 struct CapsuleList_Previews: PreviewProvider {
   struct Example: View {
     @State var isExpanded = true
@@ -49,3 +51,5 @@ struct CapsuleList_Previews: PreviewProvider {
       .previewDisplayName("CapsuleList")
   }
 }
+
+#endif

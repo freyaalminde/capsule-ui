@@ -1,6 +1,6 @@
 import SwiftUI
 //import PreviewsCapture
-@testable import CapsuleUI
+@_exported import CapsuleUI
 import IDEIcons
 
 @main

@@ -10,12 +10,14 @@
 		3B1849EF2827A72D00A67365 /* IDEIcons in Frameworks */ = {isa = PBXBuildFile; productRef = 3B1849EE2827A72D00A67365 /* IDEIcons */; };
 		3B641D972821F3340017F11D /* CapsuleUIExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B641D962821F3340017F11D /* CapsuleUIExampleApp.swift */; };
 		3B641DAA2821F3A30017F11D /* CapsuleUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3B641DA92821F3A30017F11D /* CapsuleUI */; };
+		3BB653A62BA8B83400FB6963 /* CapsuleTable+Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB653A52BA8B83300FB6963 /* CapsuleTable+Previews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3B641D932821F3340017F11D /* CapsuleUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapsuleUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B641D962821F3340017F11D /* CapsuleUIExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleUIExampleApp.swift; sourceTree = "<group>"; };
 		3B641DA72821F37F0017F11D /* capsule-ui */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "capsule-ui"; path = ..; sourceTree = "<group>"; };
+		3BB653A52BA8B83300FB6963 /* CapsuleTable+Previews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CapsuleTable+Previews.swift"; path = "../Sources/CapsuleUI/CapsuleTable+Previews.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 			isa = PBXGroup;
 			children = (
 				3B641D962821F3340017F11D /* CapsuleUIExampleApp.swift */,
+				3BB653A52BA8B83300FB6963 /* CapsuleTable+Previews.swift */,
 				3B641DA52821F3610017F11D /* Packages */,
 				3B641D942821F3340017F11D /* Products */,
 			);
@@ -132,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B641D972821F3340017F11D /* CapsuleUIExampleApp.swift in Sources */,
+				3BB653A62BA8B83400FB6963 /* CapsuleTable+Previews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
